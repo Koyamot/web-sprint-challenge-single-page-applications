@@ -47,7 +47,7 @@ const Home = () => {
          <>
         <ImgContainer className="img-container">
         <Tagline>Get your 'Fancy Shmancy' pizzas!</Tagline>
-        <Link to="/pizza"><Btn><Text>Order Now!</Text></Btn></Link>
+        <Link to="/pizza" data-cy="order"><Btn><Text>Order Now!</Text></Btn></Link>
         </ImgContainer>
         </>
 

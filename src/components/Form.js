@@ -127,13 +127,20 @@ const Form = () => {
     }
 
     const orderSchema = yup.object().shape({
-        name: yup.string().min(2, "Please enter at least 2 characters").required("Please enter your name"),
+        name: yup
+        .string()
+        .min(2, "Please enter at least 2 characters")
+        .required("Please enter your name"),
         email: yup
         .string()
         .email("Must be a valid email")
         .required("Must include an email"),
-        instructions: yup.string(),
-        size: yup.string().oneOf(["Small", "Medium", "Large"]).required("Select a size"),
+        instructions: yup
+        .string(),
+        size: yup
+        .string()
+        .oneOf(["Small", "Medium", "Large"])
+        .required("Select a size"),
         pepperoni: yup.boolean().oneOf([true, false]),
         sausage: yup.boolean().oneOf([true, false]),
         mushroom: yup.boolean().oneOf([true, false]),
@@ -145,7 +152,6 @@ const Form = () => {
         cheese: yup.boolean().oneOf([true, false]),
         seasoning: yup.boolean().oneOf([true, false]),
         terms: yup.boolean().oneOf([true], "Please agree to Terms & Conditions")
-
     });
 
 
@@ -154,18 +160,18 @@ const Form = () => {
         orderSchema.isValid(orderForm).then((isValid) => {
           setButtonDisabled(!isValid);
         });
-      }, [orderForm, orderSchema]);
+      }, [orderForm]);
 
     return (
         <div className="formApp">
             <h1>Create your "Fancy Shmancy" Pizza!!</h1>
             <p>Don't see one of your favorite toppings? Please ask for it in the "Special Instructions" and we'll do our best to make it happen!</p>
             <PizzaForm onSubmit={submit}>
-            {serverErrors ? <p className="error">{serverErrors}</p> : null}
+            {serverErrors ? <p className="error">{serverErrors}</p> : null }
                 <label htmlFor="name">
                     Name: 
                     <input type="text" id="name" name="name" data-cy="name" value={orderForm.name} onChange={handleChange}/>
-                    {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
+                    {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null }
                 </label>
                 <label>
                     Email:
@@ -173,6 +179,7 @@ const Form = () => {
                     id="email"
                     type="text"
                     name="email"
+                    data-cy="email"
                     value={orderForm.email}
                     onChange={handleChange}
                     />
@@ -244,6 +251,7 @@ const Form = () => {
                     type="checkbox"
                     id="terms"
                     name="terms"
+                    data-cy="terms"
                     checked={orderForm.terms}
                     onChange={handleChange}
                     />
